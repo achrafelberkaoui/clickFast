@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click Fast! — UI Prototype</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="proto-index" aria-hidden="true">
+        <span class="proto-index__pill">Home</span>
+        <span class="proto-index__pill">Configuration</span>
+        <span class="proto-index__pill">Game arena</span>
+        <span class="proto-index__pill">Results</span>
+        <span class="proto-index__pill">History</span>
+    </div>
+
+    <main class="app">
+
+        <!-- ==========================================================
+       VIEW 1 — HOME
+       ========================================================== -->
+        <section class="view view--home" aria-label="Home view">
+            <p class="view-tag">View — Home</p>
+
+            <div class="shell shell--narrow">
+                <header class="brand">
+                    <p class="brand__mark" aria-hidden="true">&lt;/&gt;</p>
+                    <h1 class="brand__title">CLICK<span class="brand__accent">FAST!</span></h1>
+                    <p class="brand__subtitle">Test your reflexes. Beat your score.</p>
+                </header>
+
+                <div class="card card--best">
+                    <div class="card--best__label">Your best score</div>
+                    <div class="card--best__value">42</div>
+                    <div class="card--best__meta">Precision · Medium · 20s</div>
+                </div>
+
+                <p class="explain">
+                    A target appears inside the arena. Click it before the clock runs out —
+                    every hit moves it somewhere new. Choose Classic for pure speed, or
+                    Precision to see how accurate you really are.
+                </p>
+
+                <div class="home-actions">
+                    <button class="btn btn--primary btn--lg" type="button">Play now</button>
+                    <button class="btn btn--ghost" type="button">View history</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================
+       VIEW 2 — CONFIGURATION
+       ========================================================== -->
+        <section class="view view--config" aria-label="Configuration view">
+            <p class="view-tag">View — Configuration</p>
+
+            <div class="shell shell--narrow">
+                <div class="view-head">
+                    <span class="btn-back" aria-hidden="true">←</span>
+                    <h2 class="view-head__title">Set up your run</h2>
+                </div>
+
+                <div class="config-form">
+
+                    <div class="field">
+                        <label class="field__label" for="pseudoInput">Player name</label>
+                        <input class="field__input" type="text" id="pseudoInput" value="Yassine" minlength="2"
+                            maxlength="20" autocomplete="off">
+                        <p class="field__hint">2–20 characters</p>
+                    </div>
+
+                    <fieldset class="field">
+                        <legend class="field__label">Game mode</legend>
+                        <div class="pill-group">
+                            <button type="button" class="pill" aria-pressed="false">
+                                <span class="pill__title">Classic</span>
+                                <span class="pill__desc">Score every hit</span>
+                            </button>
+                            <button type="button" class="pill is-active" aria-pressed="true">
+                                <span class="pill__title">Precision</span>
+                                <span class="pill__desc">Misses are tracked</span>
+                            </button>
+                            <button type="button" class="pill" aria-pressed="false">
+                                <span class="pill__title">Challenge</span>
+                                <span class="pill__desc">Target won't sit still</span>
+                            </button>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="field">
+                        <legend class="field__label">Duration</legend>
+                        <div class="pill-group pill-group--row">
+                            <button type="button" class="pill pill--sm" aria-pressed="false">10s</button>
+                            <button type="button" class="pill pill--sm is-active" aria-pressed="true">20s</button>
+                            <button type="button" class="pill pill--sm" aria-pressed="false">30s</button>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="field">
+                        <legend class="field__label">Difficulty</legend>
+                        <div class="pill-group pill-group--row">
+                            <button type="button" class="pill pill--sm" aria-pressed="false">
+                                Easy <span class="pill__sub">80px</span>
+                            </button>
+                            <button type="button" class="pill pill--sm is-active" aria-pressed="true">
+                                Medium <span class="pill__sub">60px</span>
+                            </button>
+                            <button type="button" class="pill pill--sm" aria-pressed="false">
+                                Hard <span class="pill__sub">40px</span>
+                            </button>
+                        </div>
+                    </fieldset>
+
+                    <div class="field field--row">
+                        <span class="field__label" id="soundLabel">Sound</span>
+                        <button type="button" class="switch" aria-checked="true" role="switch"
+                            aria-labelledby="soundLabel">
+                            <span class="switch__track"><span class="switch__thumb"></span></span>
+                            <span class="switch__state">On</span>
+                        </button>
+                    </div>
+
+                    <button id="startGameBtn" class="btn btn--primary btn--lg btn--full" type="button">Start game</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================
+       VIEW 3 — GAME ARENA
+       ========================================================== -->
+        <section class="view view--game" aria-label="Game arena view">
+            <p class="view-tag">View — Game arena</p>
+
+            <div class="shell shell--wide">
+
+                <div class="hud">
+                    <div class="hud-item" data-hud="time">
+                        <span class="hud-item__label">Time</span>
+                        <span id="timeValue" class="hud-item__value">14</span>
+                    </div>
+                    <div class="hud-item" data-hud="score">
+                        <span class="hud-item__label">Score</span>
+                        <span id="scoreValue" class="hud-item__value">18</span>
+                    </div>
+                    <div class="hud-item" data-hud="best">
+                        <span class="hud-item__label">Best</span>
+                        <span class="hud-item__value">42</span>
+                    </div>
+                    <div class="hud-item" data-hud="misses">
+                        <span class="hud-item__label">Misses</span>
+                        <span class="hud-item__value">3</span>
+                    </div>
+                    <div class="hud-item" data-hud="accuracy">
+                        <span class="hud-item__label">Accuracy</span>
+                        <span class="hud-item__value">86%</span>
+                    </div>
+                </div>
+
+                <div class="arena-wrap">
+                    <div id="gameArena" class="arena" aria-label="Game arena">
+                        <span id="target" class="target" style="transform: translate(280px, 140px);" aria-hidden="true"></span>
+                    </div>
+                </div>
+
+                <p class="arena-hint">Click the target as fast as you can.</p>
+            </div>
+        </section>
+
+        <!-- ==========================================================
+       VIEW 4 — RESULTS
+       ========================================================== -->
+        <section class="view view--results" aria-label="Results view">
+            <p class="view-tag">View — Results</p>
+
+            <div class="shell shell--narrow">
+                <div class="results-head">
+                    <h2 class="results-head__title">Game over</h2>
+                    <p class="results-head__record">New record!</p>
+                </div>
+
+                <div class="score-display">
+                    <span class="score-display__label">Final score</span>
+                    <span class="score-display__value">27</span>
+                </div>
+
+                <div class="stat-grid">
+                    <div class="stat-card"><span class="stat-card__label">Best</span><span
+                            class="stat-card__value">27</span></div>
+                    <div class="stat-card"><span class="stat-card__label">Hits</span><span
+                            class="stat-card__value">27</span></div>
+                    <div class="stat-card"><span class="stat-card__label">Misses</span><span
+                            class="stat-card__value">4</span></div>
+                    <div class="stat-card"><span class="stat-card__label">Accuracy</span><span
+                            class="stat-card__value">87%</span></div>
+                    <div class="stat-card"><span class="stat-card__label">Mode</span><span
+                            class="stat-card__value">Precision</span></div>
+                    <div class="stat-card"><span class="stat-card__label">Difficulty</span><span
+                            class="stat-card__value">Medium</span></div>
+                    <div class="stat-card"><span class="stat-card__label">Duration</span><span
+                            class="stat-card__value">20s</span></div>
+                </div>
+
+                <div class="results-actions">
+                    <button class="btn btn--primary btn--lg" type="button">Play again</button>
+                    <button class="btn btn--ghost" type="button">Back home</button>
+                    <button class="btn btn--ghost" type="button">View history</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================
+       VIEW 5 — HISTORY
+       ========================================================== -->
+        <section class="view view--history" aria-label="History view">
+            <p class="view-tag">View — History</p>
+
+            <div class="shell shell--wide">
+                <div class="view-head">
+                    <span class="btn-back" aria-hidden="true">←</span>
+                    <h2 class="view-head__title">History</h2>
+                </div>
+
+                <div class="history-toolbar">
+                    <div class="field field--compact">
+                        <label class="field__label" for="filterMode">Filter by mode</label>
+                        <select class="field__select" id="filterMode">
+                            <option>All modes</option>
+                            <option>Classic</option>
+                            <option selected>Precision</option>
+                            <option>Challenge</option>
+                        </select>
+                    </div>
+                    <div class="field field--compact">
+                        <label class="field__label" for="sortBy">Sort by</label>
+                        <select class="field__select" id="sortBy">
+                            <option selected>Most recent</option>
+                            <option>Highest score</option>
+                        </select>
+                    </div>
+                    <button class="btn btn--danger-ghost" type="button">Clear history</button>
+                </div>
+
+                <div class="history-table-wrap">
+                    <table class="history-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Date</th>
+                                <th scope="col">Player</th>
+                                <th scope="col">Mode</th>
+                                <th scope="col">Difficulty</th>
+                                <th scope="col">Duration</th>
+                                <th scope="col">Score</th>
+                                <th scope="col">Accuracy</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>08 Sep, 14:32</td>
+                                <td>Yassine</td>
+                                <td>Precision</td>
+                                <td>Medium</td>
+                                <td>20s</td>
+                                <td class="is-score">27</td>
+                                <td>87%</td>
+                            </tr>
+                            <tr>
+                                <td>08 Sep, 14:20</td>
+                                <td>Yassine</td>
+                                <td>Classic</td>
+                                <td>Easy</td>
+                                <td>30s</td>
+                                <td class="is-score">41</td>
+                                <td>—</td>
+                            </tr>
+                            <tr>
+                                <td>07 Sep, 19:04</td>
+                                <td>Sara</td>
+                                <td>Challenge</td>
+                                <td>Hard</td>
+                                <td>10s</td>
+                                <td class="is-score">9</td>
+                                <td>—</td>
+                            </tr>
+                            <tr>
+                                <td>07 Sep, 18:47</td>
+                                <td>Yassine</td>
+                                <td>Precision</td>
+                                <td>Hard</td>
+                                <td>20s</td>
+                                <td class="is-score">15</td>
+                                <td>68%</td>
+                            </tr>
+                            <tr>
+                                <td>06 Sep, 21:11</td>
+                                <td>Sara</td>
+                                <td>Classic</td>
+                                <td>Medium</td>
+                                <td>20s</td>
+                                <td class="is-score">33</td>
+                                <td>—</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Empty state kept in markup for reference; hidden via CSS attribute so both states are visible in the static prototype -->
+                <div class="empty-state" data-demo-empty-state>
+                    <p class="empty-state__title">No sessions yet</p>
+                    <p class="empty-state__desc">Play a round and it will show up here.</p>
+                    <button class="btn btn--primary" type="button">Play now</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================
+       COMPONENT — Confirmation modal (shown statically for reference)
+       ========================================================== -->
+        <section class="view view--modal-demo" aria-label="Confirmation modal component">
+            <p class="view-tag">Component — Confirmation modal</p>
+            <div class="modal-demo-stage">
+                <div class="modal" role="dialog" aria-label="Clear history confirmation">
+                    <h3 class="modal__title">Clear all history?</h3>
+                    <p class="modal__desc">This removes every saved session. Your best scores stay untouched.</p>
+                    <div class="modal__actions">
+                        <button class="btn btn--ghost" type="button">Cancel</button>
+                        <button class="btn btn--danger" type="button">Clear history</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================
+       COMPONENT — Toast (shown statically for reference)
+       ========================================================== -->
+        <section class="view view--toast-demo" aria-label="Toast component">
+            <p class="view-tag">Component — Toast notification</p>
+            <div class="toast-demo-stage">
+                <div class="toast">History cleared.</div>
+            </div>
+        </section>
+
+    </main>
+    <script src = "js/main.js"></script>
+</body>
+
+</html>
