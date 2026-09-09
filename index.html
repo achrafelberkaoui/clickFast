@@ -51,7 +51,7 @@
                 </p>
 
                 <div class="home-actions">
-                    <button class="btn btn--primary btn--lg" type="button">Play now</button>
+                    <button id = "btnPlay" class="btn btn--primary btn--lg" type="button">Play now</button>
                     <button class="btn btn--ghost" type="button">View history</button>
                 </div>
             </div>
@@ -99,22 +99,22 @@
                     <fieldset class="field">
                         <legend class="field__label">Duration</legend>
                         <div class="pill-group pill-group--row">
-                            <button type="button" class="pill pill--sm" aria-pressed="false">10s</button>
-                            <button type="button" class="pill pill--sm is-active" aria-pressed="true">20s</button>
-                            <button type="button" class="pill pill--sm" aria-pressed="false">30s</button>
+                            <button type="button" class="pill pill--sm" data-duration="10" aria-pressed="false">10s</button>
+                            <button type="button" class="pill pill--sm is-active" data-duration="20" aria-pressed="true">20s</button>
+                            <button type="button" class="pill pill--sm" data-duration="30" aria-pressed="false">30s</button>
                         </div>
                     </fieldset>
 
                     <fieldset class="field">
                         <legend class="field__label">Difficulty</legend>
                         <div class="pill-group pill-group--row">
-                            <button type="button" class="pill pill--sm" aria-pressed="false">
+                            <button type="button" class="pill pill--sm" aria-pressed="false" data-difficulty="easy">
                                 Easy <span class="pill__sub">80px</span>
                             </button>
-                            <button type="button" class="pill pill--sm is-active" aria-pressed="true">
+                            <button type="button" class="pill pill--sm is-active" aria-pressed="true" data-difficulty="medium">
                                 Medium <span class="pill__sub">60px</span>
                             </button>
-                            <button type="button" class="pill pill--sm" aria-pressed="false">
+                            <button type="button" class="pill pill--sm" aria-pressed="false"data-difficulty="hard">
                                 Hard <span class="pill__sub">40px</span>
                             </button>
                         </div>
@@ -189,7 +189,7 @@
 
                 <div class="score-display">
                     <span class="score-display__label">Final score</span>
-                    <span class="score-display__value">27</span>
+                    <span id="finalScoreValue" class="score-display__value">27</span>
                 </div>
 
                 <div class="stat-grid">
