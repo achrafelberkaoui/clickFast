@@ -73,7 +73,7 @@
 
                     <div class="field">
                         <label class="field__label" for="pseudoInput">Player name</label>
-                        <input class="field__input" type="text" id="pseudoInput" value="Yassine" minlength="2"
+                        <input class="field__input" type="text" id="pseudoInput" minlength="2"
                             maxlength="20" autocomplete="off">
                         <p class="field__hint">2–20 characters</p>
                     </div>
@@ -81,15 +81,15 @@
                     <fieldset class="field">
                         <legend class="field__label">Game mode</legend>
                         <div class="pill-group">
-                            <button type="button" class="pill" aria-pressed="false">
+                            <button type="button" class="pill" aria-pressed="false" data-mode="classic">
                                 <span class="pill__title">Classic</span>
                                 <span class="pill__desc">Score every hit</span>
                             </button>
-                            <button type="button" class="pill is-active" aria-pressed="true">
+                            <button type="button" class="pill is-active" aria-pressed="true" data-mode="precision">
                                 <span class="pill__title">Precision</span>
                                 <span class="pill__desc">Misses are tracked</span>
                             </button>
-                            <button type="button" class="pill" aria-pressed="false">
+                            <button type="button" class="pill" aria-pressed="false" data-mode="challenge">
                                 <span class="pill__title">Challenge</span>
                                 <span class="pill__desc">Target won't sit still</span>
                             </button>
@@ -120,15 +120,6 @@
                         </div>
                     </fieldset>
 
-                    <div class="field field--row">
-                        <span class="field__label" id="soundLabel">Sound</span>
-                        <button type="button" class="switch" aria-checked="true" role="switch"
-                            aria-labelledby="soundLabel">
-                            <span class="switch__track"><span class="switch__thumb"></span></span>
-                            <span class="switch__state">On</span>
-                        </button>
-                    </div>
-
                     <button id="startGameBtn" class="btn btn--primary btn--lg btn--full" type="button">Start game</button>
                 </div>
             </div>
@@ -157,11 +148,11 @@
                     </div>
                     <div class="hud-item" data-hud="misses">
                         <span class="hud-item__label">Misses</span>
-                        <span class="hud-item__value">3</span>
+                        <span id ="missesValue" class="hud-item__value">3</span>
                     </div>
                     <div class="hud-item" data-hud="accuracy">
                         <span class="hud-item__label">Accuracy</span>
-                        <span class="hud-item__value">86%</span>
+                        <span id ="accuracyValue" class="hud-item__value">86%</span>
                     </div>
                 </div>
 
@@ -194,13 +185,13 @@
 
                 <div class="stat-grid">
                     <div class="stat-card"><span class="stat-card__label">Best</span><span
-                            class="stat-card__value">27</span></div>
+                           id = "resultBestValue" class="stat-card__value">27</span></div>
                     <div class="stat-card"><span class="stat-card__label">Hits</span><span
-                            class="stat-card__value">27</span></div>
+                           id = "resultHitsValue" class="stat-card__value">27</span></div>
                     <div class="stat-card"><span class="stat-card__label">Misses</span><span
-                            class="stat-card__value">4</span></div>
+                           id = "resultMissesValue" class="stat-card__value">4</span></div>
                     <div class="stat-card"><span class="stat-card__label">Accuracy</span><span
-                            class="stat-card__value">87%</span></div>
+                          id = "resultAccuracyValue"  class="stat-card__value">87%</span></div>
                     <div class="stat-card"><span class="stat-card__label">Mode</span><span
                             class="stat-card__value">Precision</span></div>
                     <div class="stat-card"><span class="stat-card__label">Difficulty</span><span
@@ -210,9 +201,9 @@
                 </div>
 
                 <div class="results-actions">
-                    <button class="btn btn--primary btn--lg" type="button">Play again</button>
-                    <button class="btn btn--ghost" type="button">Back home</button>
-                    <button class="btn btn--ghost" type="button">View history</button>
+                    <button id="playAgainBtn" class="btn btn--primary btn--lg" type="button">Play again</button>
+                    <button id="backHomeBtn" class="btn btn--ghost" type="button">Back home</button>
+                    <button id="viewHistoryBtn" class="btn btn--ghost" type="button">View history</button>
                 </div>
             </div>
         </section>
@@ -233,10 +224,10 @@
                     <div class="field field--compact">
                         <label class="field__label" for="filterMode">Filter by mode</label>
                         <select class="field__select" id="filterMode">
-                            <option>All modes</option>
-                            <option>Classic</option>
-                            <option selected>Precision</option>
-                            <option>Challenge</option>
+                                <option value="all">Tous</option>
+                                <option value="classic">Classique</option>
+                                <option value="precision">Précision</option>
+                                <option value="challenge">Challenge</option>
                         </select>
                     </div>
                     <div class="field field--compact">
@@ -263,51 +254,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>08 Sep, 14:32</td>
-                                <td>Yassine</td>
-                                <td>Precision</td>
-                                <td>Medium</td>
-                                <td>20s</td>
-                                <td class="is-score">27</td>
-                                <td>87%</td>
-                            </tr>
-                            <tr>
-                                <td>08 Sep, 14:20</td>
-                                <td>Yassine</td>
-                                <td>Classic</td>
-                                <td>Easy</td>
-                                <td>30s</td>
-                                <td class="is-score">41</td>
-                                <td>—</td>
-                            </tr>
-                            <tr>
-                                <td>07 Sep, 19:04</td>
-                                <td>Sara</td>
-                                <td>Challenge</td>
-                                <td>Hard</td>
-                                <td>10s</td>
-                                <td class="is-score">9</td>
-                                <td>—</td>
-                            </tr>
-                            <tr>
-                                <td>07 Sep, 18:47</td>
-                                <td>Yassine</td>
-                                <td>Precision</td>
-                                <td>Hard</td>
-                                <td>20s</td>
-                                <td class="is-score">15</td>
-                                <td>68%</td>
-                            </tr>
-                            <tr>
-                                <td>06 Sep, 21:11</td>
-                                <td>Sara</td>
-                                <td>Classic</td>
-                                <td>Medium</td>
-                                <td>20s</td>
-                                <td class="is-score">33</td>
-                                <td>—</td>
-                            </tr>
+
                         </tbody>
                     </table>
                 </div>
